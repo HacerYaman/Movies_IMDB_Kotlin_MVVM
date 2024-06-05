@@ -9,46 +9,49 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/poster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
-        android:id="@+id/button"
+        android:id="@+id/star_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" >
+        app:layout_constraintEnd_toEndOf="@+id/poster"
+        app:layout_constraintStart_toStartOf="@+id/poster"
+        app:layout_constraintTop_toBottomOf="@+id/poster" >
 
     </ImageButton>
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/name_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:text="TextView"
+        android:text="Inseption"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintEnd_toEndOf="@+id/rate_txt"
+        app:layout_constraintStart_toStartOf="@+id/rate_txt"
+        app:layout_constraintTop_toBottomOf="@+id/rate_txt" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/rate_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:text="TextView"
+        android:text="4.6"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/star_button"
+        app:layout_constraintStart_toStartOf="@+id/star_button"
+        app:layout_constraintTop_toBottomOf="@+id/star_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

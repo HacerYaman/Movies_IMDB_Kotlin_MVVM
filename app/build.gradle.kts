@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
 }
 
 android {
@@ -37,6 +38,11 @@ android {
 
 dependencies {
 
+
+    val retrofitVersion = "2.9.0"
+    val glideVersion = "4.14.2"
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -47,4 +53,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.swiperefreshlayout)
+
+
+    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
+
+    implementation ("com.github.bumptech.glide:glide:$glideVersion")
+
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
 }
