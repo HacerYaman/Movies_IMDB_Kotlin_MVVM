@@ -2,24 +2,51 @@ package com.baitent.movies_imdb_kotlin_mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.baitent.movies_imdb_kotlin_mvvm.model.MovieModel
+import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
+import com.baitent.movies_imdb_kotlin_mvvm.sercives.MovieApiService
+import com.baitent.movies_imdb_kotlin_mvvm.sercives.MovieResponse
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class MovieListViewModel : ViewModel(){
 
-    val movies= MutableLiveData<List<MovieModel>>()
+    val movies2= MutableLiveData<List<Movie>>()
+    val movies= MutableLiveData<MovieResponse?>()
     val moviesError = MutableLiveData<Boolean>()
     val moviesLoading = MutableLiveData<Boolean>()
 
+    private val movieService = MovieApiService()
+    private val disposable = CompositeDisposable()
 
-    fun loadData(){
+    init {
+        getMoviesFromApi()
+    }
 
-        val movie = MovieModel("Inception", "url1", "Movie", "4.6", "description1", "urlPoster1")
-        val movie2 = MovieModel("Some Movie", "url2", "Series", "4.6", "description2", "urlPoster2")
-        val movie3 = MovieModel("Another Movie", "url3", "Documentary", "4.6", "description3", "urlPoster3")
+    private fun getMoviesFromApi() {
+        moviesLoading.value=true
 
-        val movieList = arrayListOf(movie, movie2, movie3)
+        disposable.add(
+            movieService.getData().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<MovieResponse>(){
+                    override fun onSuccess(value: MovieResponse?) {
+                        movies.value = value
+                        moviesLoading.value = false
+                    }
 
-        movies.value = movieList
+                    override fun onError(e: Throwable?) {
+                        moviesError.value = true
+                        moviesLoading.value = false
+                    }
+                })
+        )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 
 }

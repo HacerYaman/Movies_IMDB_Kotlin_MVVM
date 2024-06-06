@@ -42,7 +42,6 @@ dependencies {
     val retrofitVersion = "2.9.0"
     val glideVersion = "4.14.2"
 
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -67,5 +66,8 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.8")
+    implementation ("io.reactivex.rxjava2:rxandroid:2.0.1")
 
 }

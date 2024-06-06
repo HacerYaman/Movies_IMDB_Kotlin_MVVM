@@ -3,4 +3,5 @@
     <color name="colorPrimaryNight" tools:ignore="MissingDefaultResource">#FF9800</color>
     <color name="colorPrimaryDarkNight" tools:ignore="MissingDefaultResource">#3700B3</color>
     <color name="colorAccentNight" tools:ignore="MissingDefaultResource">#03DAC5</color>
+    <color name="colorBackgroundNight" tools:ignore="MissingDefaultResource">#171B1A</color>
 </resources>
