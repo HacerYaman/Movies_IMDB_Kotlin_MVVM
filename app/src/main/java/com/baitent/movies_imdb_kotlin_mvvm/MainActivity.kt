@@ -3,60 +3,35 @@ package com.baitent.movies_imdb_kotlin_mvvm
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.baitent.movies_imdb_kotlin_mvvm.sercives.api_acces_token_long
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import java.io.IOException
-
+import android.util.Log
+import com.baitent.movies_imdb_kotlin_mvvm.model.MovieResponse
+import com.baitent.movies_imdb_kotlin_mvvm.sercives.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-
-
-    private val client = OkHttpClient()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = makeNetworkRequest()
-            if (response != null) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    handleResponse(response)
+        val call = RetrofitClient.apiService.getPopularMovies()
+
+        call.enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                if (response.isSuccessful) {
+                    val movieResponse = response.body()
+                    movieResponse?.results?.forEach { movie ->
+                        Log.d("MainActivity", "Movie: ${movie.title}, Rating: ${movie.vote_average}")
+                    }
                 }
             }
-        }
-    }
 
-    private fun makeNetworkRequest(): Response? {
-        val request = Request.Builder()
-            .url("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1")
-            .get()
-            .addHeader("accept", "application/json")
-            .addHeader("Authorization", api_acces_token_long)
-            .build()
-
-        return try {
-            client.newCall(request).execute()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
-
-    private fun handleResponse(response: Response) {
-        if (response.isSuccessful) {
-            // Do something with the response
-           println("başarılı")
-            // Update UI or handle data as needed
-        } else {
-            // Handle the error
-        }
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                Log.e("MainActivity", "Error: ${t.message}")
+            }
+        })
     }
 }

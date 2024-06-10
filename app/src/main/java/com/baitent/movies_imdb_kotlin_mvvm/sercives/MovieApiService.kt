@@ -1,23 +1,17 @@
 package com.baitent.movies_imdb_kotlin_mvvm.sercives
 
-import io.reactivex.Single
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MovieApiService {
+object RetrofitClient {
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
 
-    private val BASE_URL = "https://api.themoviedb.org/3/"
-
-
-    private val api_request= Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build().create(MovieService::class.java)
-
-    fun getData(): Single<MovieResponse>{
-        return api_request.getPopularMovies(api_key)
+    val apiService: TMDbApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(TMDbApiService::class.java)
     }
-
 }
+

@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.baitent.movies_imdb_kotlin_mvvm.R
 import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 
-class MovieAdapter(private val movieList: ArrayList<Movie>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val movieList: List<Movie>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val movieTitle: TextView = view.findViewById(R.id.name_txt)
+        var movieTitle: String = view.findViewById<TextView?>(R.id.name_txt).toString()
         val movieRate: TextView = view.findViewById(R.id.rate_txt)
         val moviePoster: ImageView = view.findViewById(R.id.poster)
     }
@@ -29,16 +29,8 @@ class MovieAdapter(private val movieList: ArrayList<Movie>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movieList[position]
-        holder.movieTitle.text = movie.title
-        //holder.movieRate.text = movie.rate
-      //  holder.moviePoster.downloadFromUrl(movie.movieImg)
+        holder.movieTitle = movie.title
+
+        //holder.itemView.overview.text = movie.overview
     }
-
-    fun updateMovieList(newMovieList: List<Movie>) {
-        movieList.clear()
-        movieList.addAll(newMovieList)
-        notifyDataSetChanged()
-    }
-
-
 }

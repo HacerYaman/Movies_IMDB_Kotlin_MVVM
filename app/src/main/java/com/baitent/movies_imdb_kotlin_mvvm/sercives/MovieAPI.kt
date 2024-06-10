@@ -1,22 +1,19 @@
 package com.baitent.movies_imdb_kotlin_mvvm.sercives
 
-import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
-import com.google.gson.annotations.SerializedName
-import io.reactivex.Single
+import com.baitent.movies_imdb_kotlin_mvvm.model.MovieResponse
+import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
-interface MovieService  {
-
-    //GET
+interface TMDbApiService {
+    @Headers("Authorization: $api_acces_token_long")
     @GET("movie/popular")
-    fun getPopularMovies(@Query(api_key) apiKey: String): Single<MovieResponse>
-
+    fun getPopularMovies(
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1
+    ): Call<MovieResponse>
 }
-data class MovieResponse(
-    @SerializedName("results") val results: List<Movie>
-)
-
 
 
 
