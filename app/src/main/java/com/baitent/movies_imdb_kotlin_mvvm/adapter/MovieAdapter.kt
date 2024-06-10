@@ -11,15 +11,16 @@ import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 
 class MovieAdapter(private val movieList: List<Movie>): RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var movieTitle: String = view.findViewById<TextView?>(R.id.name_txt).toString()
-        val movieRate: TextView = view.findViewById(R.id.rate_txt)
-        val moviePoster: ImageView = view.findViewById(R.id.poster)
+
+        val poster: ImageView = view.findViewById(R.id.poster)
+        val nameTxt: TextView = view.findViewById(R.id.name_txt)
+        val rateTxt: TextView = view.findViewById(R.id.rate_txt)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item,parent,false)
-
+        val view = inflater.inflate(R.layout.item, parent, false)
         return MovieViewHolder(view)
     }
 
@@ -29,8 +30,7 @@ class MovieAdapter(private val movieList: List<Movie>): RecyclerView.Adapter<Mov
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movieList[position]
-        holder.movieTitle = movie.title
-
-        //holder.itemView.overview.text = movie.overview
+        holder.nameTxt.text = movie.title
+        holder.rateTxt.text = movie.vote_average.toString()
     }
 }

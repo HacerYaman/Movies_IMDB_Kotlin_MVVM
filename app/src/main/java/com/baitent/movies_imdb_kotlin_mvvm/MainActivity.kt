@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val call = RetrofitClient.apiService.getPopularMovies()
-
-        call.enqueue(object : Callback<MovieResponse> {
+       /* RetrofitClient.apiService.getPopularMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
                     val movieResponse = response.body()
@@ -32,6 +30,6 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                 Log.e("MainActivity", "Error: ${t.message}")
             }
-        })
+        })*/
     }
 }

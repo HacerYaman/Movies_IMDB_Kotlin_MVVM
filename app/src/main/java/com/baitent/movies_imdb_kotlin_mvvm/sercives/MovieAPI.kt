@@ -9,9 +9,10 @@ import retrofit2.http.Query
 interface TMDbApiService {
     @Headers("Authorization: $api_acces_token_long")
     @GET("movie/popular")
+
     fun getPopularMovies(
-        @Query("language") language: String = "en-US",
-        @Query("page") page: Int = 1
+       // @Query("language") language: String = "en-US",
+        //@Query("page") page: Int = 1
     ): Call<MovieResponse>
 }
 
