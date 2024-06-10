@@ -11,8 +11,8 @@ interface TMDbApiService {
     @GET("movie/popular")
 
     fun getPopularMovies(
-       // @Query("language") language: String = "en-US",
-        //@Query("page") page: Int = 1
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 5
     ): Call<MovieResponse>
 }
 

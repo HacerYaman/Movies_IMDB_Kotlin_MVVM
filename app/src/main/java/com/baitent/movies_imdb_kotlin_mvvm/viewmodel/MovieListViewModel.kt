@@ -2,7 +2,6 @@ package com.baitent.movies_imdb_kotlin_mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
 import android.util.Log
 import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 import com.baitent.movies_imdb_kotlin_mvvm.model.MovieResponse
@@ -18,16 +17,16 @@ class MovieListViewModel() : ViewModel() {
     val moviesError = MutableLiveData<Boolean>()
     val moviesLoading = MutableLiveData<Boolean>()
 
-    private val disposable = CompositeDisposable()
 
-
-    fun getData(){
+    fun getData() {
         RetrofitClient.apiService.getPopularMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 if (response.isSuccessful) {
                     println("başarılı")
                     val movieResponse = response.body()
                     movieResponse?.let {
+
+
                         movies.value = it.results
                         moviesError.value = false
                     }
