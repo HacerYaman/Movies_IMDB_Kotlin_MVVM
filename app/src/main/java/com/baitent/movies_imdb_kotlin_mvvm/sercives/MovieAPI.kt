@@ -1,5 +1,6 @@
 package com.baitent.movies_imdb_kotlin_mvvm.sercives
 
+import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 import com.baitent.movies_imdb_kotlin_mvvm.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -14,6 +15,13 @@ interface TMDbApiService {
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 5
     ): Call<MovieResponse>
+
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZWQyOWY4ZDQxNDRkNjY3ODczYmY5MzaW9uIjoxfQ.X_ysKiMtmoBn5GtBTeKGcS-miXV2DAXNhjLgk51mKc0")
+    @GET("movie/{1022789}")
+
+    fun getFullDetail(
+    ): Call<Movie>
+
 }
 
 

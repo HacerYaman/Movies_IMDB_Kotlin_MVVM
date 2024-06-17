@@ -1,9 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-
+    id("kotlin-kapt")
+    kotlin("plugin.serialization") version "1.8.21"
+    alias(libs.plugins.navigationSafeArgs)
 }
-
 android {
     namespace = "com.baitent.movies_imdb_kotlin_mvvm"
     compileSdk = 34
@@ -39,6 +40,7 @@ android {
 dependencies {
 
 
+    implementation(libs.androidx.swiperefreshlayout)
     val retrofitVersion = "2.9.0"
     val glideVersion = "4.14.2"
 
@@ -52,7 +54,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.swiperefreshlayout)
 
 
     implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -74,5 +75,9 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
 
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.androidx.navigation.compose)
 
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 }

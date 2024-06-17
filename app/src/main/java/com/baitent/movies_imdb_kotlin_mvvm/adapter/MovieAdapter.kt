@@ -5,19 +5,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.baitent.movies_imdb_kotlin_mvvm.R
 import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
+import com.baitent.movies_imdb_kotlin_mvvm.view.MoviesFragmentDirections
 import com.bumptech.glide.Glide
 
-class MovieAdapter(private val movieList: List<Movie>) :
-    RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(
+    private val movieList: List<Movie>,
+    private val onItemClick: (Movie) -> Unit
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val poster: ImageView = view.findViewById(R.id.poster)
         val nameTxt: TextView = view.findViewById(R.id.name_txt)
         val rateTxt: TextView = view.findViewById(R.id.rate_txt)
 
+        fun bind(movie: Movie) {
+            itemView.setOnClickListener {
+                val action = MoviesFragmentDirections.actionMoviesFragmentToDetailFragment(movie.id)
+                itemView.findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -31,7 +42,6 @@ class MovieAdapter(private val movieList: List<Movie>) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-
         val movie = movieList[position]
         holder.nameTxt.text = movie.title
         holder.rateTxt.text = movie.vote_average.toString()
@@ -42,5 +52,7 @@ class MovieAdapter(private val movieList: List<Movie>) :
         Glide.with(holder.itemView.context)
             .load(posterUrl)
             .into(holder.poster)
+
+        holder.bind(movie)
     }
 }

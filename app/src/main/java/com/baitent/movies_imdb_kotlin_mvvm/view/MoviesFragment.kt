@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.baitent.movies_imdb_kotlin_mvvm.R
 import com.baitent.movies_imdb_kotlin_mvvm.adapter.MovieAdapter
@@ -36,25 +35,24 @@ class MoviesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewMovie)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-        // Verileri gözlemleyin ve RecyclerView'a aktarın
         movieListViewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             movies?.let {
-                movieAdapter = MovieAdapter(it)
+                movieAdapter = MovieAdapter(it) {
+                    val action =
+                        MoviesFragmentDirections.actionMoviesFragmentToDetailFragment(it.id)
+                }
                 recyclerView.adapter = movieAdapter
             }
         })
 
-        // Yükleme durumunu gözlemleyin
         movieListViewModel.moviesLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             isLoading?.let {
                 progressBar.visibility = if (it) View.VISIBLE else View.GONE
             }
         })
 
-        // Hata durumunu gözlemleyin
         movieListViewModel.moviesError.observe(viewLifecycleOwner, Observer { isError ->
             isError?.let {
-                // Hata durumunu yönetin
             }
         })
 
