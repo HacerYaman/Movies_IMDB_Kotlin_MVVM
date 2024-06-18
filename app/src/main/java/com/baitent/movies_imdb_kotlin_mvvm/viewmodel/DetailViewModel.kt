@@ -15,18 +15,19 @@ class DetailViewModel() : ViewModel() {
     val movieError = MutableLiveData<Boolean>()
     val movieLoading = MutableLiveData<Boolean>()
 
-    fun getFullDetail(movieId: String) {
+    fun getFullDetail(movieId: Int) {
         movieLoading.value = true
-        RetrofitClient.apiService.getFullDetail().enqueue(object : Callback<Movie> {
+        RetrofitClient.apiService.getFullDetail(movieId).enqueue(object : Callback<Movie> {
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
-                movieLoading.value = false
                 if (response.isSuccessful) {
-                    println("detail okayyy")
-                    println(movieDetail)
-                    movieDetail.value = response.body()
-                    movieError.value = false
+                    println("detail başarılı")
+                    println(response)
+                    val movie = response.body()
+                    movie?.let {
+                    }
                 } else {
                     movieError.value = true
+                    println("else düştü")
                 }
             }
 

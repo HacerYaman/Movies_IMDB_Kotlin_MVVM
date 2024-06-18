@@ -44,7 +44,7 @@ class DetailFragment : Fragment() {
         val args = DetailFragmentArgs.fromBundle(requireArguments())
         val movieId = args.movieId
 
-        detailViewModel.getFullDetail(movieId.toString())
+        detailViewModel.getFullDetail(movieId)
 
         observeViewModel()
 
