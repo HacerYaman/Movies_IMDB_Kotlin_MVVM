@@ -1,5 +1,7 @@
 package com.baitent.movies_imdb_kotlin_mvvm.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -32,18 +35,26 @@ class MoviesFragment : Fragment() {
 
     private lateinit var toolbar: Toolbar
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     private var isDarkTheme = false
 
 
     fun changeTheme() {
 
+        val editor = sharedPreferences.edit()
+
         if (isDarkTheme) {
-            requireActivity().setTheme(R.style.AppTheme)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            editor.putBoolean("nightMode", false)
             isDarkTheme = false
         } else {
-            requireActivity().setTheme(R.style.AppTheme)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            editor.putBoolean("nightMode", true)
             isDarkTheme = true
         }
+
+        editor.apply()
         requireActivity().recreate()
     }
 
@@ -51,6 +62,8 @@ class MoviesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         movieListViewModel.getData()
+        sharedPreferences = requireActivity().getSharedPreferences("MODE", Context.MODE_PRIVATE)
+        isDarkTheme = sharedPreferences.getBoolean("nightMode", false)
 
     }
 
@@ -121,6 +134,10 @@ class MoviesFragment : Fragment() {
                     else -> false
                 }
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        },
+            viewLifecycleOwner,
+            Lifecycle.State.CREATED
+        ) // onViewCreated içinde Lifecycle.State.CREATED kullanılmalı
     }
+
 }
