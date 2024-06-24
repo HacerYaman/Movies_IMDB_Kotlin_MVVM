@@ -21,9 +21,11 @@ class DetailViewModel() : ViewModel() {
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
                 if (response.isSuccessful) {
                     println("detail başarılı")
-                    println(response)
                     val movie = response.body()
                     movie?.let {
+                        movieDetail.value = it
+                        movieLoading.value = false
+                        movieError.value = false
                     }
                 } else {
                     movieError.value = true

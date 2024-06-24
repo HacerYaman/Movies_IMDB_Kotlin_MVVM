@@ -17,7 +17,6 @@ class MovieListViewModel() : ViewModel() {
     val moviesError = MutableLiveData<Boolean>()
     val moviesLoading = MutableLiveData<Boolean>()
 
-
     fun getData() {
         RetrofitClient.apiService.getPopularMovies().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
@@ -25,8 +24,6 @@ class MovieListViewModel() : ViewModel() {
                     println("başarılı")
                     val movieResponse = response.body()
                     movieResponse?.let {
-
-
                         movies.value = it.results
                         moviesError.value = false
                     }
@@ -34,7 +31,6 @@ class MovieListViewModel() : ViewModel() {
                     moviesError.value = true
                 }
             }
-
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                 moviesLoading.value = false
                 moviesError.value = true

@@ -17,7 +17,7 @@ interface TMDbApiService {
         @Query("page") page: Int = 5
     ): Call<MovieResponse>
 
-    @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZWQyOWY4ZDQxNDRkNjY3ODczYmY5MzaW9uIjoxfQ.X_ysKiMtmoBn5GtBTeKGcS-miXV2DAXNhjLgk51mKc0")
+    @Headers("Authorization:  $api_acces_token_long")
     @GET("movie/{movie_id}")
     fun getFullDetail(
         @Path("movie_id") movieId: Int,

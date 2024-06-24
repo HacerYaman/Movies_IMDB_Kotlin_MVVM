@@ -32,11 +32,8 @@ class MoviesFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieAdapter: MovieAdapter
-
     private lateinit var toolbar: Toolbar
-
     private lateinit var sharedPreferences: SharedPreferences
-
     private var isDarkTheme = false
 
 
@@ -76,13 +73,9 @@ class MoviesFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewMovie)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-
-
         toolbar = view.findViewById(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.title = "Movies"
-
-
 
         movieListViewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
             movies?.let {
@@ -137,7 +130,7 @@ class MoviesFragment : Fragment() {
         },
             viewLifecycleOwner,
             Lifecycle.State.CREATED
-        ) // onViewCreated içinde Lifecycle.State.CREATED kullanılmalı
+        )
     }
 
 }
