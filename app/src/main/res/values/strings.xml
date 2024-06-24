@@ -5,4 +5,5 @@
     <string name="settings">Settings</string>
     <string name="fav">Favorites</string>
     <string name="search">Search</string>
+    <string name="add_fav">fav</string>
 </resources>
