@@ -120,7 +120,6 @@ class MoviesFragment : Fragment() {
                     }
 
                     R.id.action_search -> {
-                        // Settings item seçildiğinde yapılacak işlemler
                         true
                     }
 

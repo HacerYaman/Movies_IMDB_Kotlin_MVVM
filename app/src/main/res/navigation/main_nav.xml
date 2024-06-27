@@ -20,4 +20,9 @@
             android:name="movieId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.baitent.movies_imdb_kotlin_mvvm.view.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>

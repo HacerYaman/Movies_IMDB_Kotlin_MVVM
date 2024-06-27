@@ -39,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-
         android:text="movie name"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
