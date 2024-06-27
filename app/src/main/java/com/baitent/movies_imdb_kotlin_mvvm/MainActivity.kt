@@ -39,23 +39,5 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_bar)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.bottom_list -> {
-                    navController.navigate(R.id.moviesFragment)
-                    true
-                }
-
-                R.id.bottom_fav -> {
-                    navController.navigate(R.id.favoritesFragment)
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 }

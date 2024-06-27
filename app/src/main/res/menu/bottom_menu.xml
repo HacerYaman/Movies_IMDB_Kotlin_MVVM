@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/bottom_list"
+        android:id="@+id/moviesFragment"
         android:icon="@drawable/baseline_format_list_bulleted_24"
         android:title="List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <item
-        android:id="@+id/bottom_fav"
+        android:id="@+id/favoritesFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/heart"
