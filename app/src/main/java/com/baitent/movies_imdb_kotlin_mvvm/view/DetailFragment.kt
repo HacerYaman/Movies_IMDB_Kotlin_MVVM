@@ -1,5 +1,7 @@
 package com.baitent.movies_imdb_kotlin_mvvm.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +34,8 @@ class DetailFragment : Fragment() {
     private lateinit var movieRating: TextView
     private lateinit var movieDescription: TextView
     private lateinit var toolbar: Toolbar
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var movieId: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +47,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_detail, container, false)
+
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         progressBar = view.findViewById(R.id.progressBar2)
         moviePoster = view.findViewById(R.id.movie_poster)
@@ -79,7 +85,6 @@ class DetailFragment : Fragment() {
                     return when (menuItem.itemId) {
 
                         R.id.action_fav -> {
-                            // Settings item seçildiğinde yapılacak işlemler
                             true
                         }
 

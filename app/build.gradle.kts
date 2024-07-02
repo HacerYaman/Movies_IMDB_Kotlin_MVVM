@@ -46,9 +46,6 @@ dependencies {
 
 
     implementation(libs.androidx.swiperefreshlayout)
-    val retrofitVersion = "2.9.0"
-    val glideVersion = "4.14.2"
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -61,28 +58,26 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
-    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.adapter.rxjava2)
 
-    implementation ("com.github.bumptech.glide:glide:$glideVersion")
+    implementation(libs.glide)
 
-    val room_version = "2.6.1"
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
 
-    implementation ("io.reactivex.rxjava3:rxjava:3.1.8")
-    implementation ("io.reactivex.rxjava2:rxandroid:2.0.1")
-
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
-
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.kotlinx.serialization)
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+
 }
