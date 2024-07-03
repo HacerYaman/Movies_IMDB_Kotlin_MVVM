@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuHost
@@ -21,13 +22,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import com.baitent.movies_imdb_kotlin_mvvm.R
+import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.DetailViewModel
+import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.FavoritesViewModel
 import com.bumptech.glide.Glide
 
 
 class DetailFragment : Fragment() {
 
     private val detailViewModel: DetailViewModel by viewModels()
+    private val favoriteViewModel: FavoritesViewModel by viewModels()
     private lateinit var progressBar: ProgressBar
     private lateinit var moviePoster: ImageView
     private lateinit var movieTitle: TextView
@@ -85,6 +89,26 @@ class DetailFragment : Fragment() {
                     return when (menuItem.itemId) {
 
                         R.id.action_fav -> {
+                            val movie = detailViewModel.movieDetail.value
+                            movie?.let {
+                                val favoriteMovie = Movie(
+                                    id = it.id,
+                                    title = it.title,
+                                    poster_path = it.poster_path,
+                                    vote_average = it.vote_average,
+                                    backdrop_path = "",
+                                    idRoom = "",
+                                    vote_count = 0,
+                                    popularity = 0.0,
+                                    overview = ""
+                                )
+                                favoriteViewModel.addForiveteMovie(favoriteMovie)
+                                Toast.makeText(
+                                    context,
+                                    "Movie added to favorites",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                             true
                         }
 
