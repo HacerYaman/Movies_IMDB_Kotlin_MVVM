@@ -1,6 +1,5 @@
 package com.baitent.movies_imdb_kotlin_mvvm.view
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,14 +22,11 @@ class FavoritesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var favoritesAdapter: FavoritesAdapter
     private lateinit var toolbar: Toolbar
-    private lateinit var sharedPreferences: SharedPreferences
     private val favoritesViewModel: FavoritesViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
@@ -45,12 +41,6 @@ class FavoritesFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.title = "Favorites"
 
-        favoritesViewModel.favorites.observe(viewLifecycleOwner, Observer { favorites ->
-            favorites?.let {
-                favoritesAdapter = FavoritesAdapter(it)
-                recyclerView.adapter = favoritesAdapter
-            }
-        })
 
         return view
     }

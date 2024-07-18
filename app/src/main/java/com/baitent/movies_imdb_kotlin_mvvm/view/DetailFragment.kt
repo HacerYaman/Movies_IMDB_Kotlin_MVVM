@@ -96,18 +96,14 @@ class DetailFragment : Fragment() {
                                     title = it.title,
                                     poster_path = it.poster_path,
                                     vote_average = it.vote_average,
-                                    backdrop_path = "",
-                                    idRoom = "",
-                                    vote_count = 0,
-                                    popularity = 0.0,
-                                    overview = ""
+                                    backdrop_path = it.backdrop_path,
+                                    idRoom = it.id.toString(),
+                                    vote_count = it.vote_count ?: 0,
+                                    popularity = it.popularity ?: 0.0,
+                                    overview = it.overview
                                 )
-                                favoriteViewModel.addForiveteMovie(favoriteMovie)
-                                Toast.makeText(
-                                    context,
-                                    "Movie added to favorites",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                favoriteViewModel.addFavMovie(favoriteMovie)
+                                Toast.makeText(context, "Movie added to favorites", Toast.LENGTH_SHORT).show()
                             }
                             true
                         }
