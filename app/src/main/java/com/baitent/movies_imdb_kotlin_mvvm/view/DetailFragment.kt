@@ -3,7 +3,6 @@ package com.baitent.movies_imdb_kotlin_mvvm.view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -18,11 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.baitent.movies_imdb_kotlin_mvvm.R
 import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
+import com.baitent.movies_imdb_kotlin_mvvm.room.FavoritesViewModelFactory
 import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.DetailViewModel
 import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.FavoritesViewModel
 import com.bumptech.glide.Glide
@@ -31,7 +33,9 @@ import com.bumptech.glide.Glide
 class DetailFragment : Fragment() {
 
     private val detailViewModel: DetailViewModel by viewModels()
-    private val favoriteViewModel: FavoritesViewModel by viewModels()
+    private val favoriteViewModel: FavoritesViewModel by viewModels {
+        FavoritesViewModelFactory(requireActivity().application)
+    }
     private lateinit var progressBar: ProgressBar
     private lateinit var moviePoster: ImageView
     private lateinit var movieTitle: TextView
