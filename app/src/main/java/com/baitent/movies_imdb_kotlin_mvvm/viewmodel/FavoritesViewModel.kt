@@ -2,6 +2,7 @@ package com.baitent.movies_imdb_kotlin_mvvm.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
@@ -18,6 +19,8 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val favoriteMovieDao = db.favoriteMovieDao()
 
+    //tüm favoriler
+    val allFavMovies: LiveData<List<Movie>> = favoriteMovieDao.getAllFavsLiveData()
 
     fun addFavMovie(movie: Movie) {
         viewModelScope.launch {
@@ -25,5 +28,4 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    suspend fun getAllFavMovies() = favoriteMovieDao.getAllFavs()
 }

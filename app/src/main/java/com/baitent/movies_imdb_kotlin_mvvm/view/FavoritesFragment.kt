@@ -1,6 +1,5 @@
 package com.baitent.movies_imdb_kotlin_mvvm.view
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,24 +8,29 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.baitent.movies_imdb_kotlin_mvvm.R
 import com.baitent.movies_imdb_kotlin_mvvm.adapter.FavoritesAdapter
+import com.baitent.movies_imdb_kotlin_mvvm.room.FavoritesViewModelFactory
 import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.FavoritesViewModel
 
 
 class FavoritesFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var favoritesAdapter: FavoritesAdapter
     private lateinit var toolbar: Toolbar
-    private val favoritesViewModel: FavoritesViewModel by viewModels()
-
+    private val favoriteViewModel: FavoritesViewModel by viewModels {
+        FavoritesViewModelFactory(requireActivity().application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //tüm favorileri çekme
+        favoriteViewModel.allFavMovies.observe(this) { movies ->
+            recyclerView.adapter = FavoritesAdapter(movies)
+        }
     }
 
     override fun onCreateView(
@@ -40,11 +44,6 @@ class FavoritesFragment : Fragment() {
         toolbar = view.findViewById(R.id.toolbar2)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.title = "Favorites"
-
-
         return view
     }
-
-
-
 }

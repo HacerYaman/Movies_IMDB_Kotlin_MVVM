@@ -1,5 +1,6 @@
 package com.baitent.movies_imdb_kotlin_mvvm.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,5 +14,5 @@ interface FavoriteMovieDao {
     suspend fun insert(favMovie: Movie)
 
     @Query("SELECT * FROM movie")
-    suspend fun getAllFavs(): List<Movie>
+    fun getAllFavsLiveData(): LiveData<List<Movie>>
 }
