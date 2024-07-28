@@ -11,6 +11,8 @@ import com.baitent.movies_imdb_kotlin_mvvm.R
 import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 import com.baitent.movies_imdb_kotlin_mvvm.view.MoviesFragmentDirections
 import com.bumptech.glide.Glide
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class MovieAdapter(
     private val movieList: List<Movie>,
@@ -44,8 +46,9 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movieList[position]
         holder.nameTxt.text = movie.title
-        holder.rateTxt.text = movie.vote_average.toString()
-
+        val voteAverage =
+            movie.vote_average?.let { BigDecimal(it).setScale(1, RoundingMode.HALF_UP) }
+        holder.rateTxt.text = voteAverage.toString()
         val posterPath = movie.poster_path
         val posterUrl = "https://image.tmdb.org/t/p/w500$posterPath"
 

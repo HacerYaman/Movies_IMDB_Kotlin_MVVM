@@ -22,6 +22,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import com.baitent.movies_imdb_kotlin_mvvm.R
+import com.baitent.movies_imdb_kotlin_mvvm.model.Movie
 import com.baitent.movies_imdb_kotlin_mvvm.room.FavoritesViewModelFactory
 import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.DetailViewModel
 import com.baitent.movies_imdb_kotlin_mvvm.viewmodel.FavoritesViewModel
@@ -93,7 +94,18 @@ class DetailFragment : Fragment() {
                         R.id.action_fav -> {
                             val movie = detailViewModel.movieDetail.value
                             movie?.let {
-                                favoriteViewModel.addFavMovie(it)
+                                val movieToAdd = Movie(
+                                    idRoom = it.id.toString(),  // Ensure idRoom is set
+                                    id = it.id,
+                                    title = it.title,
+                                    overview = it.overview,
+                                    poster_path = it.poster_path,
+                                    backdrop_path = it.backdrop_path,
+                                    vote_average = it.vote_average,
+                                    vote_count = it.vote_count,
+                                    popularity = it.popularity
+                                )
+                                favoriteViewModel.addFavMovie(movieToAdd)
                                 Toast.makeText(
                                     context,
                                     "Movie added to favorites",

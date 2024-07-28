@@ -119,9 +119,9 @@ class MoviesFragment : Fragment() {
                         true
                     }
 
-                    R.id.action_search -> {
-                        true
-                    }
+                    // R.id.action_search -> {
+                    //   true
+                    // }
 
                     else -> false
                 }
